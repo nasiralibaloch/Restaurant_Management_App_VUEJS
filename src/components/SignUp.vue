@@ -19,6 +19,7 @@ const signup = async () => {
     console.warn(result);
     if (result.status === 201) {
       alert("Sign up is done");
+      localStorage.setItem("user-info", JSON.stringify(result.data));
     }
   } catch (error) {
     console.error("Signup failed:", error);

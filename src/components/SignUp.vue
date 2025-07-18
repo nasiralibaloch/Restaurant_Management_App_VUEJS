@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const name = ref("");
 const email = ref("");
 const password = ref("");
@@ -18,12 +20,11 @@ const signup = async () => {
 
     console.warn(result);
     if (result.status === 201) {
-      alert("Sign up is done");
       localStorage.setItem("user-info", JSON.stringify(result.data));
+      router.push({ name: 'home' });
     }
   } catch (error) {
     console.error("Signup failed:", error);
-    alert("Something went wrong during sign up.");
   }
 };
 </script>

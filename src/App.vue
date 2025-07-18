@@ -1,16 +1,14 @@
-<template>
-  <SignUp/>
-</template>
+<!-- App.vue -->
+<script setup>
+import { RouterView } from 'vue-router';
 
-<script>
-import SignUp from './components/SignUp.vue';
-export default {
-  name: 'App',
-  components: {
-  SignUp
-  }
-}
+// No components or logic needed for now
+
 </script>
+
+<template>
+  <router-view></router-view>
+</template>
 
 <style>
 #app {

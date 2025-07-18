@@ -1,29 +1,29 @@
-<script>
+<script setup>
+import { ref } from "vue";
 import axios from "axios";
-export default {
-  name: "SignUp",
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: "",
-    };
-  },
-  methods: {
-    async signup() {
-      console.warn("signup", this.name, this.email, this.password);
-      let result = await axios.post("http://localhost:3000/users", {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-      });
-      console.warn(result);
-      if (result.status==201) {
-        alert('sign up is done');
-      }
-      
-    },
-  },
+
+const name = ref("");
+const email = ref("");
+const password = ref("");
+
+const signup = async () => {
+  console.warn("signup", name.value, email.value, password.value);
+
+  try {
+    const result = await axios.post("http://localhost:3000/users", {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+    });
+
+    console.warn(result);
+    if (result.status === 201) {
+      alert("Sign up is done");
+    }
+  } catch (error) {
+    console.error("Signup failed:", error);
+    alert("Something went wrong during sign up.");
+  }
 };
 </script>
 <template>
@@ -56,7 +56,7 @@ export default {
           v-model="password"
         />
       </div>
-      <button v-on:click="signup" class="btn btn-primary w-100">Sign Up</button>
+      <button @click="signup" class="btn btn-primary w-100">Sign Up</button>
     </div>
   </div>
 </template>

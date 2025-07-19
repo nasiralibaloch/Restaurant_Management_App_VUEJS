@@ -1,6 +1,15 @@
-<!-- HomeCom.vue -->
 <script setup>
-// No logic needed right now
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+onMounted(() => {
+  const user = localStorage.getItem('user-info');
+  if (!user) {
+    router.push({ name: 'signup' });
+  }
+});
 </script>
 
 <template>

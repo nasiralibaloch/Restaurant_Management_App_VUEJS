@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
@@ -23,10 +23,17 @@ const signup = async () => {
       localStorage.setItem("user-info", JSON.stringify(result.data));
       router.push({ name: 'home' });
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.error("Signup failed:", error);
   }
-};
+}
+onMounted (() =>{
+let user=localStorage.getItem('user-info');
+if (user) {
+  router.push({name:'home'}); 
+}
+});
 </script>
 <template>
   <div class="container text-center mt-5">
@@ -59,6 +66,9 @@ const signup = async () => {
         />
       </div>
       <button @click="signup" class="btn btn-primary w-100">Sign Up</button>
+      <p>
+        <router-link to="/login">Login</router-link>
+      </p>
     </div>
   </div>
 </template>
